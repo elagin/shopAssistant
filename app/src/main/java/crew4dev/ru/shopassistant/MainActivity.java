@@ -4,18 +4,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.widget.EditText;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText editResult;
     EditText editPrice;
     EditText editWeight;
+    TableLayout table;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        table = (TableLayout) findViewById(R.id.tableLayout);
+        table.requestLayout();
+
+
         editResult = findViewById(R.id.editResult);
 
         editPrice = findViewById(R.id.editPrice);
@@ -75,5 +85,12 @@ public class MainActivity extends AppCompatActivity {
             ex.toString();
         }
         return res;
+    }
+
+    private void update() {
+        table.removeAllViews();
+        TableRow row = (TableRow) LayoutInflater.from(this).inflate(R.layout.item_row, null);
+        ((TextView) row.findViewById(R.id.textViewName)).setText("Пельмени");
+        ((TextView) row.findViewById(R.id.textViewCost)).setText(String.valueOf(10));
     }
 }
